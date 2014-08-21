@@ -64,10 +64,15 @@ mod Base64 {
     
     // Decode array of u8 bytes
     pub fn DecodeBytes(source:&[u8]) -> Vec<u8> {
+        
         let bytes = source;
         let mut i =0;
         let mut output:Vec<u8> = vec![];
         let maxLen = bytes.len();
+        
+        if source.len() % 4 != 0 {
+            return output;
+        }
         
         while i < maxLen {
             let value1:u8 = BaseIndexToByte(bytes[i]);
@@ -135,13 +140,12 @@ fn main() {
     decoded = ::Base64::DecodeStr("ZWFzdXJlLg==");
     ::Base64::Debug::PrintBytes(decoded); 
     
-    encoded = ::Base64::EncodeStr("C:\\Users\\ZERO\\AppData\\Local\\Viky Notes\\VikyNotes.xml");
+    encoded = ::Base64::EncodeStr("C:\\Users\\AppData\\Local\\Viky Notes\\VikyNotes.exe");
     ::Base64::Debug::PrintBytes(encoded);
-    decoded = ::Base64::DecodeStr("QzpcVXNlcnNcWkVST1xBcHBEYXRhXExvY2FsXFZpa3kgTm90ZXNcVmlreU5vdGVzLnhtbA==");
+    decoded = ::Base64::DecodeStr("QzpcVXNlcnNcQXBwRGF0YVxMb2NhbFxWaWt5IE5vdGVzXFZpa3lOb3Rlcy5leGU=");
     ::Base64::Debug::PrintBytes(decoded);
-
-    encoded = ::Base64::EncodeStr("C:\\Users\\ZERO\\AppData\\Local\\Viky Notes\\VikyNotes.xml");
-    ::Base64::Debug::PrintBytes(encoded);
-    decoded = ::Base64::DecodeStr("QzpcVXNlcnNcWkVST1xBcHBEYXRhXExvY2FsXFZpa3kgTm90ZXNcVmlreU5vdGVzLnhtbA==");
+  
+    
+    decoded = ::Base64::DecodeStr("TW");
     ::Base64::Debug::PrintBytes(decoded);
 }
